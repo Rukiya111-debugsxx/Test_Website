@@ -54,6 +54,12 @@
             70% { box-shadow: 0 0 0 8px rgba(229, 9, 20, 0); }
             100% { box-shadow: 0 0 0 0px rgba(229, 9, 20, 0); }
         }
+
+        /* Confetti particle style - controlled by JS for animation */
+        .confetti-particle {
+            pointer-events: none; 
+            transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+        }
     </style>
 </head>
 <body class="text-white font-sans min-h-screen">
@@ -155,7 +161,7 @@
                         <p class="text-sm font-mono text-netflix-red mb-1">NOV 15, 2025 | 20:00 KST</p>
                         <h4 class="text-xl font-bold mb-1">JAKE's Birthday Special</h4>
                         <p class="text-gray-400 text-sm">Exclusive Weverse Live</p>
-                        <button class="mt-3 text-sm flex items-center font-semibold text-white bg-netflix-red px-3 py-1 rounded-full w-fit">
+                        <button class="mt-3 text-sm flex items-center font-semibold text-white bg-netflix-red px-3 py-1 rounded-full w-fit" onclick="handleButtonClick(event)">
                              <i data-lucide="calendar-check" class="w-4 h-4 mr-1"></i> SET REMINDER
                         </button>
                     </div>
@@ -163,16 +169,16 @@
                     <img src="https://placehold.co/400x600/181818/E50914?text=JAKE+LIVE" onerror="this.onerror=null; this.src='https://placehold.co/400x600/181818/E50914?text=JAKE+LIVE';" class="absolute inset-0 w-full h-full object-cover opacity-30">
                 </div>
                 
-                <!-- Schedule Item 2 -->
+                <!-- Schedule Item 2 - NOW ANCHOR TAG -->
                 <div class="flex-shrink-0 w-72 h-64 bg-card-bg rounded-lg shadow-lg hover:shadow-2xl hover:border-netflix-red border border-transparent transition duration-300 cursor-pointer p-4 relative overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     <div class="relative h-full flex flex-col justify-end z-10">
                         <p class="text-sm font-mono text-netflix-red mb-1">NOV 19, 2025 | 22:00 KST</p>
                         <h4 class="text-xl font-bold mb-1">[EN-log] HEESEUNG's Day Off</h4>
                         <p class="text-gray-400 text-sm">Official YouTube Content Release</p>
-                        <button class="mt-3 text-sm flex items-center font-semibold text-white bg-gray-600 px-3 py-1 rounded-full w-fit hover:bg-gray-700">
+                        <a href="https://www.youtube.com/watch?v=M66CkF1j0F8&list=PLMQ4WMltba-F67iE1rTXm58n5mnFWqSir" target="_blank" class="mt-3 text-sm flex items-center font-semibold text-white bg-gray-600 px-3 py-1 rounded-full w-fit hover:bg-gray-700">
                             <i data-lucide="bell" class="w-4 h-4 mr-1"></i> VIEW TRAILER
-                        </button>
+                        </a>
                     </div>
                     <!-- Placeholder "Poster" image -->
                     <img src="https://placehold.co/400x600/181818/E50914?text=HEESEUNG+EN-LOG" onerror="this.onerror=null; this.src='https://placehold.co/400x600/181818/E50914?text=HEESEUNG+EN-LOG';" class="absolute inset-0 w-full h-full object-cover opacity-30">
@@ -185,7 +191,7 @@
                         <p class="text-sm font-mono text-netflix-red mb-1">DEC 08, 2025 | TBD</p>
                         <h4 class="text-xl font-bold mb-1">SUNGHOON & SUNOO Chat</h4>
                         <p class="text-gray-400 text-sm">Spontaneous Instagram Live</p>
-                        <button class="mt-3 text-sm flex items-center font-semibold text-white bg-netflix-red px-3 py-1 rounded-full w-fit">
+                        <button class="mt-3 text-sm flex items-center font-semibold text-white bg-netflix-red px-3 py-1 rounded-full w-fit" onclick="handleButtonClick(event)">
                              <i data-lucide="heart" class="w-4 h-4 mr-1"></i> FAVORITE
                         </button>
                     </div>
@@ -200,7 +206,7 @@
                         <p class="text-sm font-mono text-netflix-red mb-1">New Series: Episode 1</p>
                         <h4 class="text-xl font-bold mb-1">EN's TMI Interview</h4>
                         <p class="text-gray-400 text-sm">YouTube Exclusive (Coming Soon)</p>
-                        <button class="mt-3 text-sm flex items-center font-semibold text-white bg-gray-600 px-3 py-1 rounded-full w-fit hover:bg-gray-700">
+                        <button class="mt-3 text-sm flex items-center font-semibold text-white bg-gray-600 px-3 py-1 rounded-full w-fit hover:bg-gray-700" onclick="handleButtonClick(event)">
                             <i data-lucide="plus" class="w-4 h-4 mr-1"></i> MY LIST
                         </button>
                     </div>
@@ -220,12 +226,92 @@
         ENHYPEN Live Hub - Fan Project. All content links belong to BELIFT LAB and the respective platforms.
     </footer>
 
+    <!-- Notification Toast Container -->
+    <div id="notification-toast" class="fixed bottom-5 right-5 z-50 p-4 rounded-lg shadow-xl text-white font-semibold transform translate-y-20 opacity-0 transition-all duration-500 ease-in-out" style="background-color: #E50914;">
+        You will be reminded when this happens 🥰🤩😍
+    </div>
+
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Note: The original version used tabs, but this Netflix template focuses on sections.
-        // We'll keep the script minimal for icon initialization.
+        // Function to create a simple confetti effect at click coordinates
+        function createConfetti(x, y) {
+            const confettiColors = ['#E50914', '#ffffff', '#ffeb3b', '#4CAF50']; // Netflix Red, White, Yellow, Green
+            const container = document.body;
+
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'confetti-particle';
+                particle.style.position = 'absolute';
+                particle.style.width = '6px';
+                particle.style.height = '6px';
+                particle.style.borderRadius = '50%';
+                particle.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                particle.style.zIndex = 1000;
+
+                // Randomize trajectory and speed
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 8 + 5;
+                const translateX = Math.cos(angle) * velocity * 10;
+                const translateY = Math.sin(angle) * velocity * 10;
+
+                container.appendChild(particle);
+
+                // Trigger animation after a slight delay
+                setTimeout(() => {
+                    // Launch particles upwards and outwards, then fade them out
+                    particle.style.transform = `translate(${translateX}px, ${translateY}px) translateY(-40px)`;
+                    particle.style.opacity = 0;
+                }, 10);
+
+                // Clean up the particle after animation
+                setTimeout(() => {
+                    particle.remove();
+                }, 800);
+            }
+        }
+
+        // Function to show the custom notification toast
+        function showNotification() {
+            const toast = document.getElementById('notification-toast');
+            
+            // Reset state
+            toast.style.opacity = 0;
+            toast.style.transform = 'translateY(20px)';
+
+            // Show toast
+            setTimeout(() => {
+                toast.style.opacity = 1;
+                toast.style.transform = 'translateY(0)';
+            }, 10);
+
+            // Hide toast after 3 seconds
+            setTimeout(() => {
+                toast.style.opacity = 0;
+                toast.style.transform = 'translateY(20px)';
+            }, 3000);
+        }
+
+        // Main button handler
+        function handleButtonClick(event) {
+            // Stop default action if there was one (prevents navigation/form submission)
+            event.preventDefault(); 
+            
+            // 1. Get click position (center of the button) for confetti
+            const rect = event.currentTarget.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            // 2. Trigger confetti
+            createConfetti(centerX, centerY);
+
+            // 3. Trigger notification
+            showNotification();
+        }
     </script>
 </body>
+</html>
 </html>
