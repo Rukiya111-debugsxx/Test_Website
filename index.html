@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENHYPEN Live Hub | The Next Level of Fandom</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Custom Tailwind Configuration (Netflix Style) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'netflix-dark': '#141414',
+                        'netflix-red': '#E50914',
+                        'card-bg': '#1e1e1e',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Base background for Netflix feel */
+        body {
+            background-color: #141414;
+        }
+        /* Custom scrollbar for a sleeker look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E50914;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+
+        .hero-title {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .live-pulse {
+            animation: pulse-border 1.5s infinite;
+        }
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0px rgba(229, 9, 20, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(229, 9, 20, 0); }
+            100% { box-shadow: 0 0 0 0px rgba(229, 9, 20, 0); }
+        }
+    </style>
+</head>
+<body class="text-white font-sans min-h-screen">
+
+    <!-- Navbar (Minimal Netflix Style) -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 px-4 sm:px-8 py-3 flex items-center shadow-lg">
+        <h1 class="text-2xl font-black text-netflix-red tracking-wider mr-6">
+            ENHYPEN
+        </h1>
+        <div class="space-x-4 text-sm font-semibold hidden sm:flex text-gray-300">
+            <a href="#featured" class="hover:text-white transition duration-200">Featured</a>
+            <a href="#schedule" class="hover:text-white transition duration-200">Upcoming</a>
+            <a href="#platforms" class="hover:text-white transition duration-200">Platforms</a>
+        </div>
+    </nav>
+
+    <div class="pt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- 1. FEATURED LIVE STREAM (YouTube Hero) -->
+        <section id="featured" class="mb-12">
+            <div class="relative pt-[56.25%] rounded-lg overflow-hidden shadow-2xl border-4 border-netflix-red/60">
+                <!-- YouTube Embed (Placeholder) -->
+                <iframe 
+                    class="absolute top-0 left-0 w-full h-full" 
+                    src="https://www.youtube.com/embed/FPDYeRk2PO8?autoplay=0&controls=1&rel=0&showinfo=0" 
+                    title="ENHYPEN Featured Content" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                <div>
+                    <h2 class="text-4xl font-bold hero-title">Now Watching: 'XO (Only If You Say Yes)' Official MV</h2>
+                    <p class="text-gray-400 mt-2 flex items-center text-lg">
+                        <i data-lucide="play-circle" class="w-5 h-5 mr-2 text-netflix-red live-pulse"></i> 
+                        <span class="live-pulse text-netflix-red font-semibold mr-2">LIVE</span> &nbsp;or Latest Official Content
+                    </p>
+                </div>
+                <a href="https://www.youtube.com/@ENHYPENOFFICIAL" target="_blank" class="mt-4 sm:mt-0 px-6 py-3 bg-netflix-red hover:bg-red-700 text-white font-bold rounded-md transition duration-200 shadow-md flex items-center">
+                    <i data-lucide="youtube" class="w-5 h-5 mr-2"></i> Watch on YouTube
+                </a>
+            </div>
+        </section>
+
+        <!-- --- -->
+
+        <!-- 2. LIVE PLATFORM LINKS (Weverse & Instagram Tiles) -->
+        <section id="platforms" class="mb-12">
+            <h3 class="text-2xl font-bold mb-4 text-gray-200">Where Else To Watch Live</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Weverse Tile -->
+                <div class="group relative card-bg p-6 rounded-lg shadow-xl overflow-hidden transform hover:scale-[1.02] transition duration-300 border-t-4 border-blue-500/0 hover:border-blue-500">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-900/30 to-black/50 opacity-80 group-hover:opacity-100 transition duration-300"></div>
+                    <div class="relative z-10">
+                        <i data-lucide="message-square-text" class="w-10 h-10 mb-3 text-blue-400"></i>
+                        <h4 class="text-3xl font-bold mb-2">Weverse LIVE</h4>
+                        <p class="text-gray-300 mb-6">Access exclusive member broadcasts and real-time chat. This content requires the official Weverse App or Web login.</p>
+                        <p class="text-sm font-semibold text-blue-300 mb-4">Content Type: Member V-Lives, Behind the Scenes</p>
+                        <a href="https://weverse.io/enhypen/feed" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition duration-200">
+                            Go to Weverse Community
+                            <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Instagram Tile -->
+                <div class="group relative card-bg p-6 rounded-lg shadow-xl overflow-hidden transform hover:scale-[1.02] transition duration-300 border-t-4 border-pink-500/0 hover:border-pink-500">
+                    <div class="absolute inset-0 bg-gradient-to-br from-pink-900/30 to-black/50 opacity-80 group-hover:opacity-100 transition duration-300"></div>
+                    <div class="relative z-10">
+                        <i data-lucide="instagram" class="w-10 h-10 mb-3 text-pink-400"></i>
+                        <h4 class="text-3xl font-bold mb-2">Instagram LIVE</h4>
+                        <p class="text-gray-300 mb-6">Casual, spontaneous live sessions often held by individual members. Watch directly through the Instagram app.</p>
+                        <p class="text-sm font-semibold text-pink-300 mb-4">Content Type: Member Random Streams, Quick Updates</p>
+                        <a href="https://www.instagram.com/enhypen/" target="_blank" class="inline-flex items-center px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white font-semibold rounded-full transition duration-200">
+                            Go to Instagram Profile
+                            <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- --- -->
+
+        <!-- 3. UPCOMING SCHEDULE (Watch Next / Continue Watching Row) -->
+        <section id="schedule" class="mb-12">
+            <h3 class="text-2xl font-bold mb-4 text-gray-200">Upcoming Content & Schedule</h3>
+            
+            <div class="flex overflow-x-auto space-x-4 pb-4">
+                
+                <!-- Schedule Item 1 -->
+                <div class="flex-shrink-0 w-72 h-64 bg-card-bg rounded-lg shadow-lg hover:shadow-2xl hover:border-netflix-red border border-transparent transition duration-300 cursor-pointer p-4 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="relative h-full flex flex-col justify-end z-10">
+                        <p class="text-sm font-mono text-netflix-red mb-1">NOV 15, 2025 | 20:00 KST</p>
+                        <h4 class="text-xl font-bold mb-1">JAKE's Birthday Special</h4>
+                        <p class="text-gray-400 text-sm">Exclusive Weverse Live</p>
+                        <button class="mt-3 text-sm flex items-center font-semibold text-white bg-netflix-red px-3 py-1 rounded-full w-fit">
+                             <i data-lucide="calendar-check" class="w-4 h-4 mr-1"></i> SET REMINDER
+                        </button>
+                    </div>
+                    <!-- Placeholder "Poster" image -->
+                    <img src="https://placehold.co/400x600/181818/E50914?text=JAKE+LIVE" onerror="this.onerror=null; this.src='https://placehold.co/400x600/181818/E50914?text=JAKE+LIVE';" class="absolute inset-0 w-full h-full object-cover opacity-30">
+                </div>
+                
+                <!-- Schedule Item 2 -->
+                <div class="flex-shrink-0 w-72 h-64 bg-card-bg rounded-lg shadow-lg hover:shadow-2xl hover:border-netflix-red border border-transparent transition duration-300 cursor-pointer p-4 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="relative h-full flex flex-col justify-end z-10">
+                        <p class="text-sm font-mono text-netflix-red mb-1">NOV 19, 2025 | 22:00 KST</p>
+                        <h4 class="text-xl font-bold mb-1">[EN-log] HEESEUNG's Day Off</h4>
+                        <p class="text-gray-400 text-sm">Official YouTube Content Release</p>
+                        <button class="mt-3 text-sm flex items-center font-semibold text-white bg-gray-600 px-3 py-1 rounded-full w-fit hover:bg-gray-700">
+                            <i data-lucide="bell" class="w-4 h-4 mr-1"></i> VIEW TRAILER
+                        </button>
+                    </div>
+                    <!-- Placeholder "Poster" image -->
+                    <img src="https://placehold.co/400x600/181818/E50914?text=HEESEUNG+EN-LOG" onerror="this.onerror=null; this.src='https://placehold.co/400x600/181818/E50914?text=HEESEUNG+EN-LOG';" class="absolute inset-0 w-full h-full object-cover opacity-30">
+                </div>
+                
+                <!-- Schedule Item 3 -->
+                <div class="flex-shrink-0 w-72 h-64 bg-card-bg rounded-lg shadow-lg hover:shadow-2xl hover:border-netflix-red border border-transparent transition duration-300 cursor-pointer p-4 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="relative h-full flex flex-col justify-end z-10">
+                        <p class="text-sm font-mono text-netflix-red mb-1">DEC 08, 2025 | TBD</p>
+                        <h4 class="text-xl font-bold mb-1">SUNGHOON & SUNOO Chat</h4>
+                        <p class="text-gray-400 text-sm">Spontaneous Instagram Live</p>
+                        <button class="mt-3 text-sm flex items-center font-semibold text-white bg-netflix-red px-3 py-1 rounded-full w-fit">
+                             <i data-lucide="heart" class="w-4 h-4 mr-1"></i> FAVORITE
+                        </button>
+                    </div>
+                    <!-- Placeholder "Poster" image -->
+                    <img src="https://placehold.co/400x600/181818/E50914?text=2025+LIVE" onerror="this.onerror=null; this.src='https://placehold.co/400x600/181818/E50914?text=2025+LIVE';" class="absolute inset-0 w-full h-full object-cover opacity-30">
+                </div>
+
+                <!-- Schedule Item 4 -->
+                <div class="flex-shrink-0 w-72 h-64 bg-card-bg rounded-lg shadow-lg hover:shadow-2xl hover:border-netflix-red border border-transparent transition duration-300 cursor-pointer p-4 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="relative h-full flex flex-col justify-end z-10">
+                        <p class="text-sm font-mono text-netflix-red mb-1">New Series: Episode 1</p>
+                        <h4 class="text-xl font-bold mb-1">EN's TMI Interview</h4>
+                        <p class="text-gray-400 text-sm">YouTube Exclusive (Coming Soon)</p>
+                        <button class="mt-3 text-sm flex items-center font-semibold text-white bg-gray-600 px-3 py-1 rounded-full w-fit hover:bg-gray-700">
+                            <i data-lucide="plus" class="w-4 h-4 mr-1"></i> MY LIST
+                        </button>
+                    </div>
+                    <!-- Placeholder "Poster" image -->
+                    <img src="https://placehold.co/400x600/181818/E50914?text=TMI+INTERVIEW" onerror="this.onerror=null; this.src='https://placehold.co/400x600/181818/E50914?text=TMI+INTERVIEW';" class="absolute inset-0 w-full h-full object-cover opacity-30">
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- --- -->
+
+    </div>
+    
+    <!-- Footer -->
+    <footer class="mt-12 py-6 text-center text-gray-500 text-sm border-t border-gray-800">
+        ENHYPEN Live Hub - Fan Project. All content links belong to BELIFT LAB and the respective platforms.
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Note: The original version used tabs, but this Netflix template focuses on sections.
+        // We'll keep the script minimal for icon initialization.
+    </script>
+</body>
+</html>
